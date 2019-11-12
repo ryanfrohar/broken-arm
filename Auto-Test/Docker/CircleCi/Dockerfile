@@ -7,4 +7,8 @@ RUN apt-get install -y sqlite3 libsqlite3-dev
 RUN mkdir /db
 RUN /usr/bin/sqlite3 /db/test.db
 
-CMD ["bin/sh"]
+ADD start-script.sh /home/
+
+LABEL com.circleci.preserve-entrypoint=true
+
+ENTRYPOINT ["./home/start-script.sh"]
