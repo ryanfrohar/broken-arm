@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ryanfrohar/broken-arm:v1.0
+    steps:
+      - checkout
+  test:
+    docker:
+      - image: ryanfrohar/broken-arm:v1.0
+    steps:
+      - checkout
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
