@@ -9,4 +9,4 @@ RUN /usr/bin/sqlite3 /db/test.db
 
 LABEL com.circleci.preserve-entrypoint=true
 
-ENTRYPOINT sqlite3
+ENTRYPOINT sleep 10000
