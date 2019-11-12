@@ -1,3 +1,3 @@
 #!/bin/bash
 #testing purposes
-docker run -it arm32v7/python:latest /bin/bash
+docker run -it broken-arm:v1.0 /bin/bash
