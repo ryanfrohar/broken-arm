@@ -64,17 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
     }
-
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-            String info = null;
+        String info = null;
+
             if(data != null){
                 Uri uri = data.getData();
                 String path = uri.getPath();
@@ -84,14 +80,22 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getContentResolver().openInputStream(uri))));
                     info = (br.readLine());
+                    String temp = info;
 
+                    while (temp != null){
+                        temp = br.readLine();
+                        if(temp == null){
+                            //Do noething
+                        }else{
+                            info = info + "\n";
+                            info = info + temp;
+                        }
+
+                    }
+                    br.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                /*
-                if(path.contains("emulated")){
-                    path = path.substring(path.indexOf("0") + 1);
-                }*/
                 Toast.makeText(this, "" + path, Toast.LENGTH_SHORT).show();
                 source.setText(info);
 
