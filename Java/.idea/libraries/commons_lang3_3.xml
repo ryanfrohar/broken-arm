@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="commons-lang3-3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jSerialComm-2.5.2.jar!/" />
+      <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/Fazecast-jSerialComm-155ae79/src/main/java" />
+      <root url="file://$PROJECT_DIR$/lib/Fazecast-jSerialComm-155ae79/src/test/java" />
+      <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9-src/src/main/java" />
+      <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9-src/src/test/java" />
+      <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" />
+      <root url="file://$PROJECT_DIR$/lib/usb4java-javax-usb4java-javax-1.3.0/src/main/java" />
+      <root url="file://$PROJECT_DIR$/lib/usb4java-javax-usb4java-javax-1.3.0/src/test/java" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" recursive="false" type="SOURCES" />
+  </library>
+</component>
