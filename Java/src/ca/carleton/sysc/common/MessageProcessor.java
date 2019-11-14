@@ -1,62 +1,98 @@
 package ca.carleton.sysc.common;
 
+import ca.carleton.sysc.common.message.Input;
 import ca.carleton.sysc.common.message.strategy.MessageProcessingStrategy;
 import ca.carleton.sysc.common.message.strategy.ParameterizedCommandStrategy;
 import ca.carleton.sysc.common.message.strategy.SendTextCommandStrategy;
 import ca.carleton.sysc.common.message.strategy.SimpleCommandStrategy;
-import ca.carleton.sysc.common.types.Command;
-import ca.carleton.sysc.communication.ArduinoTransceiver;
-import org.apache.commons.lang3.EnumUtils;
+import ca.carleton.sysc.common.types.ResultType;
+import ca.carleton.sysc.common.util.PacketDataSupport;
+import ca.carleton.sysc.communication.UdpTransceiver;
+import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.Arrays;
+import java.net.DatagramPacket;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Processes the input message into g-code for the Arduino
  */
 public class MessageProcessor implements Runnable {
 
-    private final String[] messageArgs;
+    private final DatagramPacket packet;
 
-    private final ArduinoTransceiver arduinoTransceiver;
+    private final UdpTransceiver udpTransceiver;
 
-    // TODO needs the return address of the UDP packet such that it can return results
-    public MessageProcessor(String[] messageArgs) {
-        this.messageArgs = messageArgs;
-        this.arduinoTransceiver = new ArduinoTransceiver();
+    private final PacketDataSupport packetDataSupport;
+
+    public MessageProcessor(final DatagramPacket packet) {
+        this.packet = packet;
+        this.udpTransceiver = new UdpTransceiver();
+        this.packetDataSupport = new PacketDataSupport();
     }
 
     @Override
     public void run() {
 
-        if (messageArgs.length < 1 || !EnumUtils.isValidEnum(Command.class, messageArgs[0])) {
-            System.out.println(String.format("Command not recognized: %s", Arrays.toString(messageArgs)));
-            // TODO return an error message back to the application
+        List<String> result = this.validate();
+        if(!result.isEmpty()) {
+            final String errorMessage = "Given message contains validation errors, reporting to user and ignoring message\n" + String.join("\n", result);
+            System.out.println(errorMessage);
+            byte[] bytes = this.packetDataSupport.buildPacketData(ResultType.ERROR.name(), errorMessage);
+            this.udpTransceiver.send(new DatagramPacket(bytes, bytes.length, this.packet.getAddress(), this.packet.getPort()));
             return;
         }
 
-        Command command = Command.valueOf(messageArgs[0]);
-        System.out.println(String.format("Command recognized: %s", command.name()));
+        final Input input = this.packetDataSupport.getInputFromData(packet.getData());
+        System.out.println(String.format("Command recognized: %s", input.getCommand().name()));
 
-        final MessageProcessingStrategy strategy = this.getStrategy(command);
+        final MessageProcessingStrategy strategy = this.getStrategy(input);
+        final String returnValue = strategy.execute();
 
-        // FIXME This is a gross over simplification. There could be multiple lines of g-code to write
-        String gCode = strategy.processMessage();
-        this.arduinoTransceiver.write(gCode);
-
-        // TODO return via udp the result
+        // return result via udp
+        final byte[] returnBytes = returnValue.getBytes();
+        this.udpTransceiver.send(new DatagramPacket(returnBytes, returnBytes.length, this.packet.getAddress(), this.packet.getPort()));
     }
 
-    private MessageProcessingStrategy getStrategy(final Command command) {
-        final MessageProcessingStrategy strategy;
+    /**
+     * Validate the given DatagramPacket
+     * @return list of error caught in validation
+     */
+    private List<String> validate() {
+        List<String> errors = new ArrayList<>();
+        final byte[] data = packet.getData();
 
-        if(messageArgs.length == 1) {
-            strategy = new SimpleCommandStrategy(command);
-        } else if(command.equals(Command.SEND_TEXT)) {
-            strategy = new SendTextCommandStrategy(command, messageArgs[1]);
-        } else {
-            strategy = new ParameterizedCommandStrategy(command, Arrays.copyOfRange(messageArgs, 1, messageArgs.length));
+        if (ArrayUtils.isEmpty(data)) {
+             errors.add("packet data is empty");
         }
 
-        return strategy;
+        final Input input = this.packetDataSupport.getInputFromData(data);
+
+        if (input.getCommand() == null) {
+            errors.add(String.format("Command not recognized: %s", new String(data, StandardCharsets.UTF_8)));
+        }
+
+        return errors;
+    }
+
+    private MessageProcessingStrategy getStrategy(final Input input) {
+        final MessageProcessingStrategy strategy;
+
+        // Find a strategy by specific commands first
+        switch(input.getCommand()) {
+            case SEND_TEXT:
+                return new SendTextCommandStrategy(input);
+        }
+
+        // Find a strategy by the command type second
+        switch (input.getCommand().getCommandType()) {
+            case NO_PARAMETER:
+                return new SimpleCommandStrategy(input);
+            case PARAMETERIZED:
+                return new ParameterizedCommandStrategy(input);
+            default:
+                throw new IllegalStateException("Unexpected value: " + input.getCommand().getCommandType());
+        }
     }
 }

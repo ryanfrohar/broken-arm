@@ -5,6 +5,7 @@ package ca.carleton.sysc.common.types;
  */
 public enum Command {
 
+    DEVELOPER("%s", CommandType.PARAMETERIZED),
     STATUS("?", CommandType.NO_PARAMETER),
     PAUSE("!", CommandType.NO_PARAMETER),
     ABORT("M00", CommandType.NO_PARAMETER),

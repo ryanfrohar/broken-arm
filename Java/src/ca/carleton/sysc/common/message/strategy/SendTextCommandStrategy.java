@@ -1,23 +1,20 @@
 package ca.carleton.sysc.common.message.strategy;
 
-import ca.carleton.sysc.common.types.Command;
+import ca.carleton.sysc.common.message.Input;
 
 /**
  * Evaluates a text message into executable g-code and saves it to be executed on the START_JOB command
  */
 public class SendTextCommandStrategy implements MessageProcessingStrategy {
 
-    private final Command command;
+    private final Input input;
 
-    private final String text;
-
-    public SendTextCommandStrategy(final Command command, final String text) {
-        this.command = command;
-        this.text = text;
+    public SendTextCommandStrategy(final Input input) {
+        this.input = input;
     }
 
     @Override
-    public String processMessage() {
+    public String execute() {
         return null;
     }
 }
