@@ -14,15 +14,9 @@ public enum Command {
     ESTOP("M112", CommandType.NO_PARAMETER),
     SEND_TEXT("", CommandType.PARAMETERIZED);
 
-    private static final String NEW_LINE = "\r\n";
-
     private final String code;
 
     private final CommandType commandType;
-
-    public byte[] getBytes() {
-        return (this.code + NEW_LINE).getBytes();
-    }
 
     Command(final String code, final CommandType commandType) {
         this.code = code;

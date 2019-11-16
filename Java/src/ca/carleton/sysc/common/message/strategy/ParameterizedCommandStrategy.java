@@ -1,13 +1,12 @@
 package ca.carleton.sysc.common.message.strategy;
 
 import ca.carleton.sysc.common.message.Input;
-import ca.carleton.sysc.common.types.Command;
 import ca.carleton.sysc.communication.ArduinoTransceiver;
 
 /**
  * Evaluates a parameterized command into executable g-code
  */
-public class ParameterizedCommandStrategy implements MessageProcessingStrategy {
+public class ParameterizedCommandStrategy implements CommandProcessingStrategy {
 
     private final Input input;
 
@@ -15,7 +14,7 @@ public class ParameterizedCommandStrategy implements MessageProcessingStrategy {
 
     public ParameterizedCommandStrategy(final Input input) {
         this.input = input;
-        this.arduinoTransceiver = new ArduinoTransceiver();
+        this.arduinoTransceiver = ArduinoTransceiver.getInstance();
     }
 
     @Override
@@ -23,7 +22,6 @@ public class ParameterizedCommandStrategy implements MessageProcessingStrategy {
         String gCode = String.format(this.input.getCommand().getCode(), this.input.getParameters().toArray());
 
         this.arduinoTransceiver.write(gCode);
-//        return this.arduinoTransceiver.read();
-        return "test";
+        return this.arduinoTransceiver.read();
     }
 }

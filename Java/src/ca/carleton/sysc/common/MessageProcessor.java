@@ -1,7 +1,7 @@
 package ca.carleton.sysc.common;
 
 import ca.carleton.sysc.common.message.Input;
-import ca.carleton.sysc.common.message.strategy.MessageProcessingStrategy;
+import ca.carleton.sysc.common.message.strategy.CommandProcessingStrategy;
 import ca.carleton.sysc.common.message.strategy.ParameterizedCommandStrategy;
 import ca.carleton.sysc.common.message.strategy.SendTextCommandStrategy;
 import ca.carleton.sysc.common.message.strategy.SimpleCommandStrategy;
@@ -9,16 +9,20 @@ import ca.carleton.sysc.common.types.ResultType;
 import ca.carleton.sysc.common.util.PacketDataSupport;
 import ca.carleton.sysc.communication.UdpTransceiver;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.DatagramPacket;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Processes the input message into g-code for the Arduino
+ * Processes the input UDP message to be processed by the {@link CommandProcessor}
+ * and returns the to the received address via UDP
  */
 public class MessageProcessor implements Runnable {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MessageProcessor.class);
 
     private final DatagramPacket packet;
 
@@ -34,23 +38,18 @@ public class MessageProcessor implements Runnable {
 
     @Override
     public void run() {
-
         List<String> result = this.validate();
         if(!result.isEmpty()) {
-            final String errorMessage = "Given message contains validation errors, reporting to user and ignoring message\n" + String.join("\n", result);
-            System.out.println(errorMessage);
+            final String errorMessage = "Given message contains validation errors, ignoring message\n" + String.join("\n", result);
+            LOG.error(errorMessage);
             byte[] bytes = this.packetDataSupport.buildPacketData(ResultType.ERROR.name(), errorMessage);
             this.udpTransceiver.send(new DatagramPacket(bytes, bytes.length, this.packet.getAddress(), this.packet.getPort()));
             return;
         }
 
         final Input input = this.packetDataSupport.getInputFromData(packet.getData());
-        System.out.println(String.format("Command recognized: %s", input.getCommand().name()));
+        final String returnValue = new CommandProcessor(input).execute();
 
-        final MessageProcessingStrategy strategy = this.getStrategy(input);
-        final String returnValue = strategy.execute();
-
-        // return result via udp
         final byte[] returnBytes = returnValue.getBytes();
         this.udpTransceiver.send(new DatagramPacket(returnBytes, returnBytes.length, this.packet.getAddress(), this.packet.getPort()));
     }
@@ -67,17 +66,11 @@ public class MessageProcessor implements Runnable {
              errors.add("packet data is empty");
         }
 
-        final Input input = this.packetDataSupport.getInputFromData(data);
-
-        if (input.getCommand() == null) {
-            errors.add(String.format("Command not recognized: %s", new String(data, StandardCharsets.UTF_8)));
-        }
-
         return errors;
     }
 
-    private MessageProcessingStrategy getStrategy(final Input input) {
-        final MessageProcessingStrategy strategy;
+    private CommandProcessingStrategy getStrategy(final Input input) {
+        final CommandProcessingStrategy strategy;
 
         // Find a strategy by specific commands first
         switch(input.getCommand()) {

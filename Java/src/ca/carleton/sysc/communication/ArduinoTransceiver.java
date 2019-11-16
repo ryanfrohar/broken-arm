@@ -15,9 +15,9 @@ public class ArduinoTransceiver {
 
     private static final Logger LOG = LoggerFactory.getLogger(ArduinoTransceiver.class);
 
-    private static final int TIME_OUT = 10000;
+    private static final int TIME_OUT = 10_000;
 
-    private static final int SLEEP = 20;
+    private static final int SLEEP = 200;
 
     private static final int BAUD_RATE = 115200;
 
@@ -27,16 +27,51 @@ public class ArduinoTransceiver {
 
     private static final int PARITY = 0;
 
+    private static final String NEW_LINE = "\r";
+
     private static final String PORT = "COM4";
+
+    private static ArduinoTransceiver instance = null;
 
     private final SerialPort commPort;
 
-    public ArduinoTransceiver() {
+    private ArduinoTransceiver() {
         this.commPort = SerialPort.getCommPort(PORT);
-        this.initComPort();
+        this.connect();
     }
 
-    public boolean connected() {
+    public static ArduinoTransceiver getInstance()
+    {
+        if (instance == null)
+            instance = new ArduinoTransceiver();
+
+        return instance;
+    }
+
+    public boolean connect() {
+        if (this.commPort.isOpen()) {
+            return true;
+        }
+
+        this.commPort.setComPortParameters(BAUD_RATE, DATA_BITS, STOP_BITS, PARITY);
+        this.commPort.openPort();
+
+        if(LOG.isDebugEnabled()) {
+            this.addWriteListener();
+            this.addReadListener();
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                commPort.closePort();
+            }
+        }, "Shutdown-thread"));
+        LOG.debug("Connected {}", this.isConnected());
+
+        return this.isConnected();
+    }
+
+    public boolean isConnected() {
         return this.commPort.isOpen();
     }
 
@@ -45,10 +80,8 @@ public class ArduinoTransceiver {
      * @param message message to write
      */
     public void write(final String message) {
-        final SerialPort comPort = SerialPort.getCommPorts()[1];
-
-        final byte[] bytes = message.getBytes();
-        comPort.writeBytes(bytes, bytes.length);
+        final byte[] bytes = (message + NEW_LINE).getBytes();
+        this.commPort.writeBytes(bytes, bytes.length);
     }
 
     /**
@@ -88,22 +121,6 @@ public class ArduinoTransceiver {
         }
     }
 
-    private void initComPort() {
-        this.commPort.setComPortParameters(BAUD_RATE, DATA_BITS, STOP_BITS, PARITY);
-        this.commPort.openPort();
-
-        if(LOG.isDebugEnabled()) {
-            this.addWriteListener();
-            this.addReadListener();
-        }
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                commPort.closePort();
-            }
-        }, "Shutdown-thread"));
-    }
-
     private void addWriteListener() {
         this.commPort.addDataListener(new SerialPortDataListener() {
             @Override
@@ -129,9 +146,7 @@ public class ArduinoTransceiver {
                     return;
                 }
 
-                byte[] newData = new byte[commPort.bytesAvailable()];
-                int numRead = commPort.readBytes(newData, newData.length);
-                LOG.debug("Found {} bytes to read", numRead);
+                LOG.debug("Found {} bytes to read", commPort.bytesAvailable());
             }
         });
     }
