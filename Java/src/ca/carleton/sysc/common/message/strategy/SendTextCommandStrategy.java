@@ -40,8 +40,13 @@ public class SendTextCommandStrategy implements CommandProcessingStrategy {
 
             String command = String.format("python %s -b -f %s -t %s", scriptPath, fontPath, '"' + text + '"');
             LOG.debug("Executing engrave g-code generate command: {}", command);
-            Process p = Runtime.getRuntime().exec(command);
-        } catch (IOException e) {
+            final ProcessBuilder pb = new ProcessBuilder(command);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+            Process p = pb.start();
+            Thread.sleep(2_000);
+            return new String(p.getInputStream().readAllBytes());
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

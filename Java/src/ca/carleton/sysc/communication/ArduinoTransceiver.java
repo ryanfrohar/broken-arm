@@ -29,7 +29,7 @@ public class ArduinoTransceiver {
 
     private static final String NEW_LINE = "\r";
 
-    private static final String PORT = "COM4";
+    private static final String PORT = "ttyUSB0";
 
     private static ArduinoTransceiver instance = null;
 
