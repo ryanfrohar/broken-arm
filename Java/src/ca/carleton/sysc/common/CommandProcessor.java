@@ -8,6 +8,7 @@ import ca.carleton.sysc.common.message.strategy.SimpleCommandStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,6 @@ public class CommandProcessor {
             return errorMessage;
         }
 
-        LOG.info("Command recognized: {}", this.input.getCommand().name());
-
         final CommandProcessingStrategy strategy = this.getStrategy(this.input);
         return strategy.execute();
     }
@@ -53,7 +52,7 @@ public class CommandProcessor {
 
         // Find a strategy by specific commands first
         switch(input.getCommand()) {
-            case SEND_TEXT:
+            case TEXT:
                 return new SendTextCommandStrategy(input);
         }
 
