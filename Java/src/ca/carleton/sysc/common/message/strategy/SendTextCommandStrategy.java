@@ -5,7 +5,7 @@ import ca.carleton.sysc.common.message.Input;
 /**
  * Evaluates a text message into executable g-code and saves it to be executed on the START_JOB command
  */
-public class SendTextCommandStrategy implements MessageProcessingStrategy {
+public class SendTextCommandStrategy implements CommandProcessingStrategy {
 
     private final Input input;
 

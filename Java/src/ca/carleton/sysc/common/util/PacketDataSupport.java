@@ -3,6 +3,7 @@ package ca.carleton.sysc.common.util;
 import ca.carleton.sysc.common.message.Input;
 import ca.carleton.sysc.common.types.Command;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.EnumUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ public class PacketDataSupport {
     /**
      * Create a Input bean from the given data byte[]
      * @param data data from the DatagramPacket
-     * @return Input bean
+     * @return Input bean, command and parameters will be empty if invalid command is entered
      */
     public Input getInputFromData(final byte[] data) {
         final List<String> messageArguments = this.getMessageArguments(data);
-        return messageArguments.isEmpty() ?
+        return messageArguments.isEmpty() || !EnumUtils.isValidEnum(Command.class, messageArguments.get(0))?
             new Input(null, Collections.emptyList()) :
             new Input(Command.valueOf(messageArguments.get(0)), messageArguments.subList(1, messageArguments.size()));
     }

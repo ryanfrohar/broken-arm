@@ -3,6 +3,11 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jSerialComm-2.5.2.jar!/" />
       <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-1.7.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-access-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-classic-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-core-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -13,6 +18,11 @@
       <root url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" />
       <root url="file://$PROJECT_DIR$/lib/usb4java-javax-usb4java-javax-1.3.0/src/main/java" />
       <root url="file://$PROJECT_DIR$/lib/usb4java-javax-usb4java-javax-1.3.0/src/test/java" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-1.7.25-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-access-1.2.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-classic-1.2.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-core-1.2.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/lib/commons-lang3-3.9" recursive="false" type="SOURCES" />

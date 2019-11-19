@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Arm</string>
+    <string name="insert">insert</string>
+    <string name="click_on_the_button_below_to_insert_text_file">Click on the button below to insert text file</string>
+    <string name="textview">TextView</string>
+    <string-array name="Fonts">
+        <item>TimeNewRoman</item>
+        <item>Bold</item>
+        <item>Something</item>
+    </string-array>
+</resources>

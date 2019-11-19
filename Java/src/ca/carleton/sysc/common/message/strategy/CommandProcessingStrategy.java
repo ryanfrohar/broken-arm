@@ -1,6 +1,6 @@
 package ca.carleton.sysc.common.message.strategy;
 
-public interface MessageProcessingStrategy {
+public interface CommandProcessingStrategy {
 
     /**
      * Processes the incoming message and return a result of the operation
