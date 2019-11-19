@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="cnc-computer:jar">
+  <artifact type="jar" build-on-make="true" name="cnc-computer:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/cnc_computer_jar</output-path>
-    <root id="archive" name="Java.jar">
+    <root id="archive" name="cnc-computer.jar">
       <element id="module-output" name="Java" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/jSerialComm-2.5.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-over-slf4j-1.7.25.jar" path-in-jar="/" />

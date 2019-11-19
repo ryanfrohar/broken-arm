@@ -15,7 +15,7 @@ public class ArduinoTransceiver {
 
     private static final Logger LOG = LoggerFactory.getLogger(ArduinoTransceiver.class);
 
-    private static final int TIME_OUT = 10_000;
+    private static final int TIME_OUT = 30_000;
 
     private static final int SLEEP = 200;
 
