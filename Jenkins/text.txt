@@ -1,1 +1,1 @@
-+refs/pull//*:refs/remotes/origin/pr//*
++refs/pull/${ghprbPullId}/*:refs/remotes/origin/pr/${ghprbPullId}/*
