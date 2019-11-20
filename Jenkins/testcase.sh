@@ -1,5 +1,8 @@
 #!/bin/bash
-
-export ID=$1
-export SUITE=$2
-python3 testcase.py 
+echo -n "Which test suite is this case apart of?"
+read SUITE
+export SUITE
+echo -n "Where is the location of this testcase in the file directory?"
+read LOCATION
+export LOCATION
+python test.py 
