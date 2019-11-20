@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id "com.adarshr.test-logger" version "2.0.0"
+}
+
+group 'sysc3010'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    // https://mvnrepository.com/artifact/com.fazecast/jSerialComm
+    compile group: 'com.fazecast', name: 'jSerialComm', version: '2.5.3'
+    // https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.29'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-access
+    compile group: 'ch.qos.logback', name: 'logback-access', version: '1.2.3'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.29'
+}

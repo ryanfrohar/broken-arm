@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="cnc-computer.main" target="1.8" />
+      <module name="cnc-computer.test" target="1.8" />
+      <module name="sysc3010.cnc-computer.main" target="1.8" />
+      <module name="sysc3010.cnc-computer.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

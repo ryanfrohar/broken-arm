@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Java.iml" filepath="$PROJECT_DIR$/Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cnc-computer.iml" filepath="$PROJECT_DIR$/.idea/modules/cnc-computer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cnc-computer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cnc-computer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cnc-computer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/cnc-computer.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sysc3010.cnc-computer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sysc3010.cnc-computer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sysc3010.cnc-computer.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sysc3010.cnc-computer.test.iml" />
     </modules>
   </component>
 </project>
