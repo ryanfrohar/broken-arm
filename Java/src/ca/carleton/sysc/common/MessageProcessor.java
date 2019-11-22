@@ -74,7 +74,7 @@ public class MessageProcessor implements Runnable {
 
         // Find a strategy by specific commands first
         switch(input.getCommand()) {
-            case SEND_TEXT:
+            case TEXT:
                 return new SendTextCommandStrategy(input);
         }
 

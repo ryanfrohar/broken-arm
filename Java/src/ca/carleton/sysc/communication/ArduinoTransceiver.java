@@ -15,7 +15,7 @@ public class ArduinoTransceiver {
 
     private static final Logger LOG = LoggerFactory.getLogger(ArduinoTransceiver.class);
 
-    private static final int TIME_OUT = 10_000;
+    private static final int TIME_OUT = 30_000;
 
     private static final int SLEEP = 200;
 
@@ -29,7 +29,7 @@ public class ArduinoTransceiver {
 
     private static final String NEW_LINE = "\r";
 
-    private static final String PORT = "COM4";
+    private static final String PORT = "ttyUSB0";
 
     private static ArduinoTransceiver instance = null;
 

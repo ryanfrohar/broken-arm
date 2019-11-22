@@ -12,7 +12,7 @@ public enum Command {
     ABORT("M00", CommandType.NO_PARAMETER),
     RESUME("~", CommandType.NO_PARAMETER),
     ESTOP("M112", CommandType.NO_PARAMETER),
-    SEND_TEXT("", CommandType.PARAMETERIZED);
+    TEXT("", CommandType.PARAMETERIZED);
 
     private final String code;
 
