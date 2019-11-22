@@ -1,13 +1,12 @@
-package ca.carleton.sysc.common.cli;
+package ca.carleton.sysc.cli;
 
-import ca.carleton.sysc.common.CommandProcessor;
-import ca.carleton.sysc.common.message.Input;
-import ca.carleton.sysc.common.types.Command;
-import ca.carleton.sysc.common.util.LoggingUtils;
+import ca.carleton.sysc.message.CommandProcessor;
+import ca.carleton.sysc.message.Input;
+import ca.carleton.sysc.types.Command;
+import ca.carleton.sysc.util.LoggingUtils;
 import org.apache.commons.lang3.EnumUtils;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class CLI {

@@ -1,12 +1,11 @@
-package ca.carleton.sysc.common;
+package ca.carleton.sysc.message;
 
-import ca.carleton.sysc.common.message.Input;
-import ca.carleton.sysc.common.message.strategy.CommandProcessingStrategy;
-import ca.carleton.sysc.common.message.strategy.ParameterizedCommandStrategy;
-import ca.carleton.sysc.common.message.strategy.SendTextCommandStrategy;
-import ca.carleton.sysc.common.message.strategy.SimpleCommandStrategy;
-import ca.carleton.sysc.common.types.ResultType;
-import ca.carleton.sysc.common.util.PacketDataSupport;
+import ca.carleton.sysc.message.strategy.CommandProcessingStrategy;
+import ca.carleton.sysc.message.strategy.ParameterizedCommandStrategy;
+import ca.carleton.sysc.message.strategy.SendTextCommandStrategy;
+import ca.carleton.sysc.message.strategy.SimpleCommandStrategy;
+import ca.carleton.sysc.types.ResultType;
+import ca.carleton.sysc.util.PacketDataSupport;
 import ca.carleton.sysc.communication.UdpTransceiver;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package ca.carleton.sysc.common.message.strategy;
+package ca.carleton.sysc.message.strategy;
 
-import ca.carleton.sysc.common.CommandProcessor;
-import ca.carleton.sysc.common.message.Input;
+import ca.carleton.sysc.message.CommandProcessor;
+import ca.carleton.sysc.message.Input;
 import ca.carleton.sysc.communication.ArduinoTransceiver;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

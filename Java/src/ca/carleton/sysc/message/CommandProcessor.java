@@ -1,14 +1,12 @@
-package ca.carleton.sysc.common;
+package ca.carleton.sysc.message;
 
-import ca.carleton.sysc.common.message.Input;
-import ca.carleton.sysc.common.message.strategy.CommandProcessingStrategy;
-import ca.carleton.sysc.common.message.strategy.ParameterizedCommandStrategy;
-import ca.carleton.sysc.common.message.strategy.SendTextCommandStrategy;
-import ca.carleton.sysc.common.message.strategy.SimpleCommandStrategy;
+import ca.carleton.sysc.message.strategy.CommandProcessingStrategy;
+import ca.carleton.sysc.message.strategy.ParameterizedCommandStrategy;
+import ca.carleton.sysc.message.strategy.SendTextCommandStrategy;
+import ca.carleton.sysc.message.strategy.SimpleCommandStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

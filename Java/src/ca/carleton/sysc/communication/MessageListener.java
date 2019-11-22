@@ -1,6 +1,6 @@
 package ca.carleton.sysc.communication;
 
-import ca.carleton.sysc.common.MessageProcessor;
+import ca.carleton.sysc.message.MessageProcessor;
 
 import java.net.DatagramPacket;
 

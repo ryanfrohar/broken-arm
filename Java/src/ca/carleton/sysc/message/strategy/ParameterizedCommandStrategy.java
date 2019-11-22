@@ -1,6 +1,6 @@
-package ca.carleton.sysc.common.message.strategy;
+package ca.carleton.sysc.message.strategy;
 
-import ca.carleton.sysc.common.message.Input;
+import ca.carleton.sysc.message.Input;
 import ca.carleton.sysc.communication.ArduinoTransceiver;
 
 /**

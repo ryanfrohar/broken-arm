@@ -1,4 +1,4 @@
-package ca.carleton.sysc.common.message.strategy;
+package ca.carleton.sysc.message.strategy;
 
 public interface CommandProcessingStrategy {
 
