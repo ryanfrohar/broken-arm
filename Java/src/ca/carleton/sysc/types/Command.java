@@ -5,7 +5,7 @@ package ca.carleton.sysc.types;
  */
 public enum Command {
 
-    DEVELOPER("%s", CommandType.PARAMETERIZED),
+    DEV("%s", CommandType.PARAMETERIZED),
     WAKE_UP("\n\r\n\r", CommandType.NO_PARAMETER),
     STATUS("?", CommandType.NO_PARAMETER),
     PAUSE("!", CommandType.NO_PARAMETER),
