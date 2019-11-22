@@ -34,10 +34,14 @@ public class PacketDataSupport {
     public List<String> getMessageArguments(final byte[] data) {
         final List<String> messageArgs = new ArrayList<>();
 
-        for (int i = 0, cursor = 0; i < data.length; i++) {
-            if(data[i] == DELIMITER) {
-                messageArgs.add(new String(Arrays.copyOfRange(data, cursor, i), StandardCharsets.UTF_8));
-                cursor += i;
+        for (int cursor = 0, prevCursor = 0; cursor < data.length; cursor++) {
+            if(data[cursor] == DELIMITER) {
+                if(cursor == prevCursor) {
+                    break; // two consecutive null bytes indicate an end to the message
+                } else {
+                    messageArgs.add(new String(Arrays.copyOfRange(data, prevCursor, cursor), StandardCharsets.UTF_8));
+                    prevCursor = cursor;
+                }
             }
         }
 
