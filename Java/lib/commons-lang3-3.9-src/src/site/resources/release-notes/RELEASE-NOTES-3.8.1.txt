@@ -84,7 +84,7 @@ Changes in this version include:
 
 New features:
 o LANG-1352: EnumUtils.getEnumIgnoreCase and isValidEnumIgnoreCase methods added Thanks to Ruslan Sibgatullin.
-o LANG-1372: Add ToStringSummary annotation Thanks to Sérgio Ozaki.
+o LANG-1372: Add ToStringSummary annotation Thanks to Sï¿½rgio Ozaki.
 o LANG-1356: Add bypass option for classes to recursive and reflective EqualsBuilder Thanks to Yathos UG.
 o LANG-1391: Improve Javadoc for StringUtils.isAnyEmpty(null) Thanks to Sauro Matulli, Oleg Chubaryov.
 o LANG-1393: Add API SystemUtils.String getEnvironmentVariable(final String name, final String defaultValue) Thanks to Gary Gregory.
@@ -296,7 +296,7 @@ o LANG-1292: WordUtils.wrap throws StringIndexOutOfBoundsException.
 o LANG-1287: RandomStringUtils#random can enter infinite loop if end parameter
              is to small. Thanks to Ivan Morozov.
 o LANG-1285: NullPointerException in FastDateParser$TimeZoneStrategy.
-             Thanks to Francesco Chicchiriccò.
+             Thanks to Francesco Chicchiriccï¿½.
 o LANG-1281: Javadoc of StringUtils.ordinalIndexOf is contradictory.
              Thanks to Andreas Lundblad.
 o LANG-1188: StringUtils#join(T...): warning: [unchecked] Possible heap
@@ -614,9 +614,9 @@ o LANG-1176: Improve ArrayUtils removeElements time complexity to O(n). Thanks
              to Jeffery Yuan.
 o LANG-1234: getLevenshteinDistance with a threshold: optimize implementation
              if the strings lengths differ more than the threshold. Thanks to
-             Jonatan Jönsson.
+             Jonatan Jï¿½nsson.
 o LANG-1151: Performance improvements for NumberUtils.isParsable. Thanks to
-             Juan Pablo Santos Rodríguez.
+             Juan Pablo Santos Rodrï¿½guez.
 o LANG-1218: EqualsBuilder.append(Object,Object) is too big to be inlined,
              which prevents whole builder to be scalarized. Thanks to
              Ruslan Cheremin.
@@ -628,7 +628,7 @@ o LANG-1182: Clarify Javadoc of StringUtils.containsAny(). Thanks to
 o LANG-1183: Making replacePattern/removePattern methods null safe in
              StringUtils.
 o LANG-1057: Replace StringBuilder with String concatenation for better
-             optimization. Thanks to Otávio Santana.
+             optimization. Thanks to Otï¿½vio Santana.
 o LANG-1075: Deprecate SystemUtils.FILE_SEPARATOR and
              SystemUtils.PATH_SEPARATOR.
 o LANG-979:  TypeUtils.parameterizeWithOwner - wrong format descriptor for
@@ -675,13 +675,13 @@ o LANG-1080: Add NoClassNameToStringStyle implementation of ToStringStyle.
              Thanks to Innokenty Shuvalov.
 o LANG-883:  Add StringUtils.containsAny(CharSequence, CharSequence...) method.
              Thanks to Daniel Stewart.
-o LANG-1052: Multiline recursive to string style. Thanks to Jan Matèrne.
+o LANG-1052: Multiline recursive to string style. Thanks to Jan Matï¿½rne.
 o LANG-536:  Add isSorted() to ArrayUtils. Thanks to James Sawle.
 o LANG-1033: Add StringUtils.countMatches(CharSequence, char)
 o LANG-1021: Provide methods to retrieve all fields/methods annotated with a
-             specific type. Thanks to Alexander Müller.
+             specific type. Thanks to Alexander Mï¿½ller.
 o LANG-1016: NumberUtils#isParsable method(s). Thanks to
-             Juan Pablo Santos Rodríguez.
+             Juan Pablo Santos Rodrï¿½guez.
 o LANG-999:  Add fuzzy String matching logic to StringUtils. Thanks to
              Ben Ripkens.
 o LANG-994:  Add zero copy read method to StrBuilder. Thanks to
@@ -856,12 +856,12 @@ o LANG-943:  Test DurationFormatUtilsTest.testEdgeDuration fails in
 o LANG-613:  ConstructorUtils.getAccessibleConstructor() Does Not Check the
              Accessibility of Enclosing Classes
 o LANG-951:  Fragments are wrong by 1 day when using fragment YEAR or MONTH.
-             Thanks to Sebastian Götz.
+             Thanks to Sebastian Gï¿½tz.
 o LANG-950:  FastDateParser does not handle two digit year parsing like
              SimpleDateFormat
 o LANG-949:  FastDateParserTest.testParses does not test FastDateParser
 o LANG-915:  Wrong locale handling in LocaleUtils.toLocale().
-             Thanks to Sergio Fernández.
+             Thanks to Sergio Fernï¿½ndez.
 
 CHANGES
 =========
@@ -960,7 +960,7 @@ o LANG-462:  FastDateFormat supports parse methods.
 BUG FIXES
 ===========
 
-o LANG-932:  Spelling fixes. Thanks to Ville Skyttä.
+o LANG-932:  Spelling fixes. Thanks to Ville Skyttï¿½.
 o LANG-929:  OctalUnescaper tried to parse all of \279.
 o LANG-928:  OctalUnescaper had bugs when parsing octals starting with a zero.
 o LANG-905:  EqualsBuilder returned true when comparing arrays, even when the
@@ -973,7 +973,7 @@ o LANG-902:  RandomStringUtils.random javadoc was incorrectly promising letters
 o LANG-921:  BooleanUtils.xor(boolean...) produces wrong results.
 o LANG-896:  BooleanUtils.toBoolean(String str) javadoc is not updated. Thanks
              to Mark Bryan Yu.
-o LANG-879:  LocaleUtils test fails with new Locale "ja_JP_JP_#u-ca-japanese"
+o LANG-879:  LocaleUtils test fails with new Locale "ja_JP_JP_#u-main.ca-japanese"
              of JDK7.
 o LANG-836:  StrSubstitutor does not support StringBuilder or CharSequence.
              Thanks to Arnaud Brunet.

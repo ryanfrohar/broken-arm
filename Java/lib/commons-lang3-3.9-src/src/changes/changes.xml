@@ -192,7 +192,7 @@ The <action> type attribute can be add,update,fix,remove.
     <action issue="LANG-1195" type="add" dev="pschumacher" due-to="Derek C. Ashmore">Enhance MethodUtils to allow invocation of private methods</action>
     <action issue="LANG-1199" type="fix" dev="pschumacher" due-to="M. Steiger">Fix implementation of StringUtils.getJaroWinklerDistance()</action>
     <action issue="LANG-1244" type="fix" dev="pschumacher" due-to="jjbankert">Fix dead links in StringUtils.getLevenshteinDistance() javadoc</action>
-    <action issue="LANG-1242" type="fix" dev="pschumacher" due-to="Neal Stewart">"\u2284":"&nsub;" mapping missing from EntityArrays#HTML40_EXTENDED_ESCAPE</action>
+    <action issue="LANG-1242" type="fix" dev="pschumacher" due-to="Neal Stewart">"\u2284":"" mapping missing from EntityArrays#HTML40_EXTENDED_ESCAPE</action>
     <action issue="LANG-1243" type="update" dev="sebb">Simplify ArrayUtils removeElements by using new decrementAndGet() method</action>
     <action issue="LANG-1189" type="add" dev="sebb" due-to="haiyang li / Matthew Bartenschlag ">Add getAndIncrement/getAndDecrement/getAndAdd/incrementAndGet/decrementAndGet/addAndGet in Mutable* classes</action>
     <action issue="LANG-1240" type="update" dev="pschumacher" due-to="zhanhb">Optimize BitField constructor implementation</action>
@@ -421,7 +421,7 @@ The <action> type attribute can be add,update,fix,remove.
     <action issue="LANG-913" type="add" dev="britter" due-to="Allon Mureinik">Adding .gitignore to commons-lang</action>
     <action issue="LANG-837" type="add">Add ObjectUtils.toIdentityString methods that support StringBuilder, StrBuilder, and Appendable</action>
     <action issue="LANG-896" type="fix" due-to="Mark Bryan Yu">BooleanUtils.toBoolean(String str) javadoc is not updated</action>
-    <action issue="LANG-879" type="fix">LocaleUtils test fails with new Locale "ja_JP_JP_#u-ca-japanese" of JDK7</action>
+    <action issue="LANG-879" type="fix">LocaleUtils test fails with new Locale "ja_JP_JP_#u-main.ca-japanese" of JDK7</action>
     <action issue="LANG-836" type="fix" due-to="Arnaud Brunet">StrSubstitutor does not support StringBuilder or CharSequence</action>
     <action issue="LANG-693" type="fix" due-to="Calvin Echols">Method createNumber from NumberUtils doesn't work for floating point numbers other than Float</action>
     <action issue="LANG-887" type="fix">FastDateFormat does not use the locale specific cache correctly</action>
