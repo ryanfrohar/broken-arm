@@ -120,7 +120,7 @@ public class CharSet implements Serializable {
      *
      * <p>If the same range is defined twice using the same syntax, only
      * one range will be kept.
-     * Thus, "a-ca-c" creates only one range of "a-c".</p>
+     * Thus, "a-main.ca-c" creates only one range of "a-c".</p>
      *
      * <p>If the start and end of a range are in the wrong order,
      * they are reversed. Thus "a-e" is the same as "e-a".
