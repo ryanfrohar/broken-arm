@@ -643,7 +643,7 @@ o LANG-902:  RandomStringUtils.random javadoc was incorrectly promising letters
 o LANG-921:  BooleanUtils.xor(boolean...) produces wrong results.
 o LANG-896:  BooleanUtils.toBoolean(String str) javadoc is not updated. Thanks
              to Mark Bryan Yu.
-o LANG-879:  LocaleUtils test fails with new Locale "ja_JP_JP_#u-ca-japanese"
+o LANG-879:  LocaleUtils test fails with new Locale "ja_JP_JP_#u-main.ca-japanese"
              of JDK7.
 o LANG-836:  StrSubstitutor does not support StringBuilder or CharSequence.
              Thanks to Arnaud Brunet.
