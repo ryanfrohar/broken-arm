@@ -3,3 +3,5 @@
 
 export TCID=$1
 export LOCATION=$2
+
+python testResult.py

@@ -34,7 +34,7 @@ def add_testcase_row(conn, testcase_row_sql):
     """
     try:
         c = conn.cursor()
-        c.execute(testcase_row_sql, (os.environ['SUITE'], 0.0, os.environ['LOCATION']))
+        c.execute(testcase_row_sql, (os.environ['SUITE'], os.environ['LOCATION']))
         conn.commit() 
     except Error as e:
         print(e)
@@ -45,18 +45,17 @@ def main():
     sql_create_testcase_table = """ CREATE TABLE IF NOT EXISTS testcases (
                                         tcid integer primary key,
                                         suite text,
-                                        pfPerc real,
 					location text
                                     ); """
     
     sql_create_testresult_table = """CREATE TABLE IF NOT EXISTS testresults (
                                     testNumber integer primary key,
-                                    result boolean,
                                     timeStamp text,
+			            result blob,
                                     testcase_id integer,
                                     FOREIGN KEY (testcase_id) REFERENCES testcases(tcid)
                                 );"""
-    sql_add_testcase_row = '''insert into testcases(suite, pfPerc, location) values(?,?,?)'''
+    sql_add_testcase_row = '''insert into testcases(suite, location) values(?,?)'''
 
     # create a database connection
     conn = create_connection(database)

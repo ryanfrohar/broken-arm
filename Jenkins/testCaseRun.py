@@ -1,12 +1,9 @@
 import sqlite3
 import subprocess
+import shlex
 
 def readSqliteTable():
     try:
-    	import subprocess
-	cmd = ['./runTest.sh', '--arg', 'value']
-	p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-	
         sqliteConnection = sqlite3.connect('testing.db')
         cursor = sqliteConnection.cursor()
         print("Connected to Testing DB")
@@ -16,11 +13,7 @@ def readSqliteTable():
         testcases = cursor.fetchall()
         print("Total number of testcases:  ", len(testcases))
         for row in testcases:
-	    cmd = ['./runTest.sh', '--arg', 'value']
-	    tcid = row[0]
-	    location = row[3]
-            print("tcid ", row[0])
-	    print("location: ", row[3]) 
+	    subprocess.call(shlex.split('./runTest.sh %s, %s' % (row[0], row[2])))
         cursor.close()
 
     except sqlite3.Error as error:
