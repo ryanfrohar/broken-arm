@@ -1,4 +1,4 @@
-package ca.carleton.sysc.types;
+package main.ca.carleton.sysc.types;
 
 /**
  * Valid commands the CNC computer can accept to relay to GRBL

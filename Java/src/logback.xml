@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="ca.sysc3303.logger" level="INFO" additivity="false">
+    <logger name="main.ca.sysc3303.logger" level="INFO" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 

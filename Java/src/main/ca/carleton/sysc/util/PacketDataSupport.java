@@ -1,7 +1,7 @@
-package ca.carleton.sysc.util;
+package main.ca.carleton.sysc.util;
 
-import ca.carleton.sysc.message.Input;
-import ca.carleton.sysc.types.Command;
+import main.ca.carleton.sysc.message.Input;
+import main.ca.carleton.sysc.types.Command;
 import org.apache.commons.lang3.EnumUtils;
 
 import java.nio.charset.StandardCharsets;

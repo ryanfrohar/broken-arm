@@ -1,9 +1,9 @@
-package ca.carleton.sysc.cli;
+package main.ca.carleton.sysc.cli;
 
-import ca.carleton.sysc.message.CommandProcessor;
-import ca.carleton.sysc.message.Input;
-import ca.carleton.sysc.types.Command;
-import ca.carleton.sysc.util.LoggingUtils;
+import main.ca.carleton.sysc.message.CommandProcessor;
+import main.ca.carleton.sysc.message.Input;
+import main.ca.carleton.sysc.types.Command;
+import main.ca.carleton.sysc.util.LoggingUtils;
 import org.apache.commons.lang3.EnumUtils;
 
 import java.util.Arrays;

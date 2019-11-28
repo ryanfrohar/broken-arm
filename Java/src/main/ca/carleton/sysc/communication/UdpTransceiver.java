@@ -1,10 +1,8 @@
-package ca.carleton.sysc.communication;
+package main.ca.carleton.sysc.communication;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
-import java.util.Scanner;
 
 public class UdpTransceiver {
 // TODO Public receive and send

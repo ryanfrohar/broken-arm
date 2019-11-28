@@ -1,6 +1,6 @@
-package ca.carleton.sysc.message;
+package main.ca.carleton.sysc.message;
 
-import ca.carleton.sysc.types.Command;
+import main.ca.carleton.sysc.types.Command;
 
 import java.util.List;
 

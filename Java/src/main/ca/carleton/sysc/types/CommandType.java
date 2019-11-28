@@ -1,4 +1,4 @@
-package ca.carleton.sysc.types;
+package main.ca.carleton.sysc.types;
 
 /**
  * determines the type of command by its structure

@@ -1,4 +1,4 @@
-package ca.carleton.sysc.types;
+package main.ca.carleton.sysc.types;
 
 public enum ResultType {
 

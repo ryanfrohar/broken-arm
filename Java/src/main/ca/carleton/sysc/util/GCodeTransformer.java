@@ -1,4 +1,4 @@
-package ca.carleton.sysc.util;
+package main.ca.carleton.sysc.util;
 
 import java.util.List;
 

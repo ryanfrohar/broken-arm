@@ -1,8 +1,8 @@
-package ca.carleton.sysc.message.strategy;
+package main.ca.carleton.sysc.message.strategy;
 
-import ca.carleton.sysc.communication.ArduinoTransceiver;
-import ca.carleton.sysc.message.Input;
-import ca.carleton.sysc.util.GCodeTransformer;
+import main.ca.carleton.sysc.communication.ArduinoTransceiver;
+import main.ca.carleton.sysc.message.Input;
+import main.ca.carleton.sysc.util.GCodeTransformer;
 
 public class DevCommandProcessingStrategy implements CommandProcessingStrategy {
 

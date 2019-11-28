@@ -1,9 +1,9 @@
-package ca.carleton.sysc;
+package main.ca.carleton.sysc;
 
-import ca.carleton.sysc.cli.CLI;
-import ca.carleton.sysc.types.Command;
-import ca.carleton.sysc.communication.ArduinoTransceiver;
-import ca.carleton.sysc.communication.MessageListener;
+import main.ca.carleton.sysc.cli.CLI;
+import main.ca.carleton.sysc.types.Command;
+import main.ca.carleton.sysc.communication.ArduinoTransceiver;
+import main.ca.carleton.sysc.communication.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

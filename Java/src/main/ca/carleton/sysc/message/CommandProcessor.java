@@ -1,6 +1,6 @@
-package ca.carleton.sysc.message;
+package main.ca.carleton.sysc.message;
 
-import ca.carleton.sysc.message.strategy.*;
+import main.ca.carleton.sysc.message.strategy.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

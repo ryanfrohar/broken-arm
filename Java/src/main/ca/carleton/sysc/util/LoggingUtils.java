@@ -1,6 +1,6 @@
-package ca.carleton.sysc.util;
+package main.ca.carleton.sysc.util;
 
-import ca.carleton.sysc.cli.CLI;
+import main.ca.carleton.sysc.cli.CLI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

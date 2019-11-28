@@ -1,4 +1,4 @@
-package ca.carleton.sysc.communication;
+package main.ca.carleton.sysc.communication;
 
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;

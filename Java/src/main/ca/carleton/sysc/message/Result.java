@@ -1,6 +1,6 @@
-package ca.carleton.sysc.message;
+package main.ca.carleton.sysc.message;
 
-import ca.carleton.sysc.types.ResultType;
+import main.ca.carleton.sysc.types.ResultType;
 
 /**
  * Result bean used to create a return message back to the user
