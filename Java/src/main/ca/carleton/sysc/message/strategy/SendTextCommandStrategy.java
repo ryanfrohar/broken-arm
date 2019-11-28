@@ -1,8 +1,7 @@
 package main.ca.carleton.sysc.message.strategy;
 
-import main.ca.carleton.sysc.message.CommandProcessor;
-import main.ca.carleton.sysc.message.Input;
 import main.ca.carleton.sysc.communication.ArduinoTransceiver;
+import main.ca.carleton.sysc.message.Input;
 import main.ca.carleton.sysc.util.GCodeTransformer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class SendTextCommandStrategy implements CommandProcessingStrategy {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CommandProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SendTextCommandStrategy.class);
 
     private static final String FONT_PATH = "../../../../Python/F-Engrave-1.68_src/fonts/";
 
