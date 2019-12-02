@@ -45,15 +45,14 @@ public class MainActivity extends AppCompatActivity {
     String message;
     Spinner dropDown;
     String fontSelected; // what font was selected in dropdown
-    String fonts[] = {"courier","something","something2"};
+    String fonts[] = {"courier","greek_ol","iso8859-11", "unicode", "kochimincho"};
     ArrayAdapter<String> adapter;
+    Uri testUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         button = (Button) findViewById(R.id.button);// This variable is what works the insert button on the interface
@@ -67,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,fonts);//Setting my array of fonts in the dropdown
         dropDown.setAdapter(adapter);
 
+
+        // This is what you can select from the drop down
         dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -77,12 +78,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 1:
-                        fontSelected = "something";
+                        fontSelected = "greek_ol";
                         break;
 
                     case 2:
-                        fontSelected = "something2";
+                        fontSelected = "iso8859-11";
                         break;
+
+                    case 3:
+                        fontSelected = "unicode";
+                        break;
+                    case 4:
+                        fontSelected = "kochimincho";
+                        break;
+
                 }
             }
 
@@ -93,10 +102,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        //Below is the configerations of most buttons on the interface
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { // .This configs my insert button
+            public void onClick(View view) {
 
                 file = new Intent(Intent.ACTION_GET_CONTENT);
                 file.setType("*/*");
@@ -109,10 +118,8 @@ public class MainActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {// This configs my send button, it will send what ever is currently in Source over UDP
             @Override
             public void onClick(View v) {
-                //get it to send source
-                //String SendingInfo = source.toString();
-                String command = "TEXT " + fontSelected + " " + message;
-                new UDP().execute(command);
+                String command = "TEXT " + fontSelected + " " + message + " ";
+                new UDP().execute(command);// UDP is a class that takes care of sending the UDP message to the Raspberry Pi
                 
 
             }
@@ -122,16 +129,16 @@ public class MainActivity extends AppCompatActivity {
         upArrow.setOnClickListener(new View.OnClickListener() {// upArrow will send a string saying to go up
             @Override
             public void onClick(View v) {
-                //Get it to send a up string
-                source.setText("Up");
+                String command = "MOVE UP";
+                new UDP().execute(command);
             }
         });
 
         downArrow.setOnClickListener(new View.OnClickListener() {// upArrow will send a string saying to go up
             @Override
             public void onClick(View v) {
-                //Get it to send a up string
-                source.setText("Down");
+                String command = "MOVE DOWN";
+                new UDP().execute(command);
             }
         });
 
@@ -139,28 +146,28 @@ public class MainActivity extends AppCompatActivity {
         rightArrow.setOnClickListener(new View.OnClickListener() {// upArrow will send a string saying to go up
             @Override
             public void onClick(View v) {
-                //Get it to send a up string
-                source.setText("Right");
+                String command = "MOVE RIGHT";
+                new UDP().execute(command);
             }
         });
 
         leftArrow.setOnClickListener(new View.OnClickListener() {// upArrow will send a string saying to go up
             @Override
             public void onClick(View v) {
-                //Get it to send a up string
-                source.setText("Left");
+                String command = "MOVE LEFT";
+                new UDP().execute(command);
             }
         });
 
 
     }
-
+    // Below takes care of opening the phones files when INSERT is selected and reads the file
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String info = null;
 
-        if (requestCode == 10) {
+        if (requestCode == 10) {// if insert button is pressed
 
 
             if (data != null) {
@@ -191,50 +198,45 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "" + path, Toast.LENGTH_SHORT).show();
                 source.setText(info);
                 message = info;
+                testUri = uri;
 
             }
 
         }
     }
-/*
-    public void UDP (String command) {
 
-        DatagramSocket socket = null;
-        try {
-            // Convert the arguments first, to ensure that they are valid
-            final InetAddress host = InetAddress.getByName("127.0.0.1");
-            final int port = 8080;
-            final int numSend = 1;
-            socket = new DatagramSocket();
-
-            while (true) {
-                //if (.length() == 0) break;// Here i will insert what ever i wanna send
-
-                byte[] what = command.getBytes();
-                //byte[] fontUsed = font.getBytes();
-                //byte[] data = text.getBytes();
-                //byte[] message = new byte[what.length + fontUsed.length + data.length];
-
-                //System.arraycopy(what,0,message,0,what.length);
-                //System.arraycopy(fontUsed,0,message,what.length,fontUsed.length);
-                //System.arraycopy(data,0,message,fontUsed.length,data.length);
+//This is for my testing but not finished
+@RequiresApi(api = Build.VERSION_CODES.KITKAT)
+public String fileContents(Uri uri) {
+    BufferedReader br = null;
+    String contents = null;
 
 
+    try {
+        br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(getContentResolver().openInputStream(uri))));
+        contents = (br.readLine());
+        String temp = contents;
 
-                for (int i = 0; i < numSend; i++) {
-                    DatagramPacket packet1 = new DatagramPacket(what, what.length, host, port);
-                    socket.send(packet1);
-
-                }
+        while (temp != null) {
+            temp = br.readLine();
+            if (temp == null) {
+                //Do noething
+            } else {
+                contents = contents + "\n";
+                contents = contents + temp;
             }
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (socket != null)
-                socket.close();
+
         }
+        br.close();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-*/
+    return contents;
+}
+
+
+
+
 
 
 }

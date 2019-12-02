@@ -16,27 +16,25 @@ class UDP extends AsyncTask<String,Void,Void> {
         DatagramSocket socket = null;
         try {
             // Convert the arguments first, to ensure that they are valid
-            final InetAddress host = InetAddress.getByName("172.17.60.136");
-            final int port = 8080;
+            final InetAddress host = InetAddress.getByName("192.168.43.197"); //Static IP of the Raspberry Pi, 192.168.2.82 my computer "192.168.43.197" Raspberry Pi's
+            final int port = 9090; // Port the Raspberry Pi is listening on
             final int numSend = 1;
             socket = new DatagramSocket();
-            String hi = strings[0];
+            String message = strings[0];// This is the string inputed
 
             while (true) {
-                //if (.length() == 0) break;// Here i will insert what ever i wanna send
 
-                byte[] what = hi.getBytes();
-                //byte[] fontUsed = font.getBytes();
-                //byte[] data = text.getBytes();
-                //byte[] message = new byte[what.length + fontUsed.length + data.length];
-
-                //System.arraycopy(what,0,message,0,what.length);
-                //System.arraycopy(fontUsed,0,message,what.length,fontUsed.length);
-                //System.arraycopy(data,0,message,fontUsed.length,data.length);
+                byte[] convert = message.getBytes();
+                //Replacing all the space is a message with null
+                for(int j = 0; j < convert.length; j++) {
+                    if (convert[j] == 32) {
+                        convert[j] = 0;
+                    }
+                }
 
 
                 for (int i = 0; i < numSend; i++) {
-                    DatagramPacket packet1 = new DatagramPacket(what, what.length, host, port);
+                    DatagramPacket packet1 = new DatagramPacket(convert, convert.length, host, port);
                     socket.send(packet1);
 
                 }
