@@ -3,5 +3,8 @@
 
 export TCID=$1
 export LOCATION=$2
+export NOW=$(date)
 
-python testResult.py
+
+
+python testResult.py &
