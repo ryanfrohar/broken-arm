@@ -13,7 +13,8 @@ def readSqliteTable():
         testcases = cursor.fetchall()
         print("Total number of testcases:  ", len(testcases))
         for row in testcases:
-	    subprocess.call(shlex.split('./runTest.sh %s, %s' % (row[0], row[2])))
+            print("were in")
+            subprocess.call(shlex.split('./runTest.sh %s, %s' % (row[0], row[2])))
         cursor.close()
 
     except sqlite3.Error as error:
@@ -25,7 +26,6 @@ def readSqliteTable():
 
 def main():
     readSqliteTable()
-
 
 if __name__ == '__main__':
     main()

@@ -1,10 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #Script that runs testcases from database
-
 export TCID=$1
-export LOCATION=$2
 export NOW=$(date)
-
-
-
+export RESULTS="$($2)"
 python testResult.py &

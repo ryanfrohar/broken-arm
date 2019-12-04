@@ -21,23 +21,20 @@ def add_testresult_row(conn, testresult_row_sql):
     """
     try:
         c = conn.cursor()
-        c.execute(testresult_row_sql, (os.environ['TCID'], os.environ['NOW']))
+        c.execute(testresult_row_sql, (os.environ['NOW'], os.environ['RESULTS'], os.environ['TCID']))
         conn.commit() 
     except Error as e:
         print(e)
 
-def parseXML(): 
-    
-
 def main():
     database = "testing.db"
-    sql_add_testresult_row = '''insert into testresults(timeStamp, testcase_id) values(?,?)'''
+    sql_add_testresult_row = '''insert into testresults(timeStamp, result, testcase_id) values(?,?,?)'''
 
     # create a database connection
     conn = create_connection(database)
 
     if conn is not None:
-	add_testresult_row(conn, sql_add_testresult_row)
+        add_testresult_row(conn, sql_add_testresult_row)
  
 if __name__ == '__main__':
     main()
