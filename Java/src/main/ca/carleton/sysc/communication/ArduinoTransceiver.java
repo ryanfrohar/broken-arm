@@ -31,8 +31,6 @@ public class ArduinoTransceiver {
 
     private static final String NEW_LINE = "\r";
 
-    private static final String PORT_INDEX_PROPERTY = "arduino.port.index";
-
     private static ArduinoTransceiver instance = null;
 
     private SerialPort commPort;
