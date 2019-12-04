@@ -1,6 +1,6 @@
 package main.ca.carleton.sysc.cli;
 
-import main.ca.carleton.sysc.message.CommandProcessor;
+import main.ca.carleton.sysc.CommandProcessor;
 import main.ca.carleton.sysc.message.Input;
 import main.ca.carleton.sysc.types.Command;
 import main.ca.carleton.sysc.util.LoggingUtils;
