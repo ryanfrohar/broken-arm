@@ -23,6 +23,7 @@ def add_testresult_row(conn, testresult_row_sql):
         c = conn.cursor()
         c.execute(testresult_row_sql, (os.environ['NOW'], os.environ['RESULTS'], os.environ['TCID']))
         conn.commit() 
+
     except Error as e:
         print(e)
 

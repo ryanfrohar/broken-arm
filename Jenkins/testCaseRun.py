@@ -7,16 +7,22 @@ def readSqliteTable():
         sqliteConnection = sqlite3.connect('testing.db')
         cursor = sqliteConnection.cursor()
         print("Connected to Testing DB")
-
+   
         sqlite_select_query = """SELECT * from testcases"""
         cursor.execute(sqlite_select_query)
         testcases = cursor.fetchall()
         print("Total number of testcases:  ", len(testcases))
         for row in testcases:
-            print("were in")
             subprocess.call(shlex.split('./runTest.sh %s, %s' % (row[0], row[2])))
-        cursor.close()
 
+        sqlite_select_results = """SELECT * from testresults"""
+        cursor.execute(sqlite_select_results)
+        testresults = cursor.fetchall()
+        for row in testresults:
+            print(row)
+
+        cursor.close()
+        
     except sqlite3.Error as error:
         print("Failed to read data from Testcases table", error)
     finally:
