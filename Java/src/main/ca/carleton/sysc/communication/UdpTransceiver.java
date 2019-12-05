@@ -5,11 +5,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 public class UdpTransceiver {
-// TODO Public receive and send
+
     private final static int PACKET_SIZE = 508; // Size of the datagram packet
-    private final static int port = 1010;
 
-
+    private final static int port = 9090;
 
     public DatagramPacket receive() {
         // Check the argument

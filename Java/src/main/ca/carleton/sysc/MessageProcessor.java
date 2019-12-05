@@ -69,23 +69,4 @@ public class MessageProcessor implements Runnable {
         return errors;
     }
 
-    private CommandProcessingStrategy getStrategy(final Input input) {
-        final CommandProcessingStrategy strategy;
-
-        // Find a strategy by specific commands first
-        switch(input.getCommand()) {
-            case SEND_TEXT:
-                return new SendTextCommandStrategy(input);
-        }
-
-        // Find a strategy by the command type second
-        switch (input.getCommand().getCommandType()) {
-            case NO_PARAMETER:
-                return new SimpleCommandStrategy(input);
-            case PARAMETERIZED:
-                return new ParameterizedCommandStrategy(input);
-            default:
-                throw new IllegalStateException("Unexpected value: " + input.getCommand().getCommandType());
-        }
-    }
 }
