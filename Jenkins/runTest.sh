@@ -3,4 +3,4 @@
 export TCID=$1
 export NOW=$(date)
 export RESULTS="$($2)"
-python testResult.py &
+python testResult.py
