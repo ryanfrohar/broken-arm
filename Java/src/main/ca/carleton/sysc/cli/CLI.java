@@ -1,5 +1,6 @@
 package main.ca.carleton.sysc.cli;
 
+import com.sun.tools.javac.util.StringUtils;
 import main.ca.carleton.sysc.CommandProcessor;
 import main.ca.carleton.sysc.message.Input;
 import main.ca.carleton.sysc.types.Command;
@@ -48,8 +49,10 @@ public class CLI {
             return true;
         }
 
-        if (EnumUtils.isValidEnum(Command.class, args[0])) {
-            final Input input = new Input(Command.valueOf(args[0]), Arrays.asList(Arrays.copyOfRange(args, 1, args.length)));
+        String commandArg = StringUtils.toUpperCase(args[0]);
+
+        if (EnumUtils.isValidEnum(Command.class, commandArg)) {
+            final Input input = new Input(Command.valueOf(commandArg), Arrays.asList(Arrays.copyOfRange(args, 1, args.length)));
             System.out.println(new CommandProcessor(input).execute());
             return true;
         }

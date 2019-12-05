@@ -18,7 +18,7 @@ public class DevCommandProcessingStrategy implements CommandProcessingStrategy {
     @Override
     public String execute() {
         final String gCode = String.join(" ", this.input.getParameters());
-        final String newGCode = new GCodeTransformer(10,0,0).cartesianToVPlot(gCode);
+        final String newGCode = new GCodeTransformer().cartesianToVPlot(gCode);
         this.arduinoIO.write(newGCode);
         return this.arduinoIO.read();
     }
