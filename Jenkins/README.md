@@ -1,1 +1,1 @@
-# Jenkins automated testing code/scripts 
+# Jenkins automated testing code/scripts along with database scripts

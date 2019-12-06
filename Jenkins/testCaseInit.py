@@ -3,6 +3,7 @@ import os
 from sqlite3 import Error 
  
 def create_connection(db_file):
+    # Running a defensive try/except for DB connection
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -18,7 +19,7 @@ def create_table(conn, create_table_sql):
     """ create a table from the create_table_sql statement
     :param conn: Connection object
     :param create_table_sql: a CREATE TABLE statement
-    :return:
+    :return: void
     """
     try:
         c = conn.cursor()
@@ -40,14 +41,19 @@ def add_testcase_row(conn, testcase_row_sql):
         print(e)
 
 def main():
-    database = "testing.db"
+    # initialize variable for the database to eleminate "magic number"
+    database = "testing.db" 
  
+    # initialize variable for the command to create a table to eleminate "magic number"
     sql_create_testcase_table = """ CREATE TABLE IF NOT EXISTS testcases (
                                         tcid integer primary key,
                                         suite text,
 					location text
                                     ); """
     
+    # initialize variable for the testresults table to eleminate "magic number" 
+    #One can see that testcase_id references TCID in the testcases table
+
     sql_create_testresult_table = """CREATE TABLE IF NOT EXISTS testresults (
                                     testNumber integer primary key,
                                     timeStamp text,
