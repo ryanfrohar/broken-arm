@@ -1,10 +1,8 @@
 package main.ca.carleton.sysc;
 
+import com.sun.tools.javac.util.StringUtils;
 import main.ca.carleton.sysc.message.Input;
-import main.ca.carleton.sysc.message.strategy.CommandProcessingStrategy;
-import main.ca.carleton.sysc.message.strategy.ParameterizedCommandStrategy;
-import main.ca.carleton.sysc.message.strategy.SendTextCommandStrategy;
-import main.ca.carleton.sysc.message.strategy.SimpleCommandStrategy;
+import main.ca.carleton.sysc.message.strategy.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +53,8 @@ public class CommandProcessor {
         switch(input.getCommand()) {
             case TEXT:
                 return new SendTextCommandStrategy(input);
+            case DEV:
+                return new DevCommandProcessingStrategy(input);
         }
 
         // Find a strategy by the command type second

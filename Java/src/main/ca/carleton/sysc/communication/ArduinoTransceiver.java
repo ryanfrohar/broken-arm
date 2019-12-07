@@ -3,6 +3,8 @@ package main.ca.carleton.sysc.communication;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import main.ca.carleton.sysc.types.Command;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +31,23 @@ public class ArduinoTransceiver {
 
     private static final String NEW_LINE = "\r";
 
-    private static final String PORT = "ttyUSB0";
-
     private static ArduinoTransceiver instance = null;
 
-    private final SerialPort commPort;
+    private SerialPort commPort;
+
+    private int portIndex = 0;
 
     private ArduinoTransceiver() {
-        this.commPort = SerialPort.getCommPort(PORT);
+        final SerialPort[] commPorts = SerialPort.getCommPorts();
+
+        if (commPorts.length == 0){
+            String msg = "Nothing is connected to the raspberry PI, please recheck your connections and try again";
+            LOG.error(msg);
+            throw new IllegalStateException(msg);
+        }
+
+        this.commPort = commPorts[this.portIndex];
+
         this.connect();
     }
 
@@ -55,6 +66,24 @@ public class ArduinoTransceiver {
 
         this.commPort.setComPortParameters(BAUD_RATE, DATA_BITS, STOP_BITS, PARITY);
         this.commPort.openPort();
+        this.write(Command.WAKE_UP.getCode());
+
+        // Retry other ports if not connected to GRBL
+        while(StringUtils.isEmpty(this.read())) {
+            LOG.info("Could not connect to port {} at index {}", this.commPort.getSystemPortName(), this.portIndex);
+            final SerialPort[] commPorts = SerialPort.getCommPorts();
+            if (commPorts.length > this.portIndex + 1) {
+                this.portIndex++;
+            } else {
+                this.portIndex = 0;
+            }
+            LOG.info("Retrying to connect to port {} at index {}", this.commPort.getSystemPortName(), this.portIndex);
+            this.commPort.closePort();
+            this.commPort = commPorts[this.portIndex];
+            this.commPort.setComPortParameters(BAUD_RATE, DATA_BITS, STOP_BITS, PARITY);
+            this.commPort.openPort();
+            this.write(Command.WAKE_UP.getCode());
+        }
 
         if(LOG.isDebugEnabled()) {
             this.addWriteListener();
@@ -95,7 +124,7 @@ public class ArduinoTransceiver {
 
         this.awaitBytesAvailable();
 
-        if (this.commPort.bytesAvailable() != 0) {
+        if (this.commPort.bytesAvailable() > 0) {
             byte[] buffer = new byte[this.commPort.bytesAvailable()];
             this.commPort.readBytes(buffer, buffer.length);
             message = new String(buffer);
@@ -111,7 +140,7 @@ public class ArduinoTransceiver {
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
-        while (this.commPort.bytesAvailable() == 0 && stopWatch.getTime() < TIME_OUT) {
+        while (this.commPort.bytesAvailable() <= 0 && stopWatch.getTime() < TIME_OUT) {
             try {
                 Thread.sleep(SLEEP);
             } catch (InterruptedException e) {

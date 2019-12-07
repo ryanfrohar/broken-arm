@@ -1,5 +1,6 @@
 package main.ca.carleton.sysc.util;
 
+import com.sun.tools.javac.util.StringUtils;
 import main.ca.carleton.sysc.message.Input;
 import main.ca.carleton.sysc.types.Command;
 import org.apache.commons.lang3.ArrayUtils;
@@ -27,9 +28,11 @@ public class PacketDataSupport {
     public Input getInputFromData(final byte[] data) {
         final List<String> messageArguments = this.getMessageArguments(data);
         LOG.info(ArrayUtils.toString(messageArguments.toArray()));
-        return messageArguments.isEmpty() || !EnumUtils.isValidEnum(Command.class, messageArguments.get(0))?
+        final String commandArg = StringUtils.toUpperCase(messageArguments.get(0));
+
+        return messageArguments.isEmpty() || !EnumUtils.isValidEnum(Command.class, commandArg)?
                 new Input(null, Collections.emptyList()) :
-                new Input(Command.valueOf(messageArguments.get(0)), messageArguments.subList(1, messageArguments.size()));
+                new Input(Command.valueOf(commandArg), messageArguments.subList(1, messageArguments.size()));
     }
 
     /**
