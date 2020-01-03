@@ -13,7 +13,7 @@
 
 ## **Automated Testing Initialization**
 
-Once a JUnit test is ready to be integrated, the user should add the script to the /Jenkins/Tests directory. Run the interactive testcase.sh script in the Jenkins directory to add the script to the testcases database (an example of a testcase is already in the database). If you have configured it correctly, Jenkins will automatically include you JUnit test the next time it builds!
+Once a JUnit test is ready to be integrated, the user should add the script to the /Jenkins/Tests directory. Run the interactive testcase.sh script in the Jenkins directory to add the script to the testcases database (an example of a testcase is already in the database). If you have configured it correctly, Jenkins will automatically include your JUnit test the next time it builds!
 
 ## **Hardware Assembly and Software Set Up**
 
